@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome, Guest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f7f1e6;
+    --cream-2: #f2ead9;
+    --ink: #2b2420;
+    --brown: #7a5230;
+    --rust: #a9622f;
+    --gold: #c9a15a;
+    --gold-dark: #b6884a;
+    --line: #6b5b47;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    height: 100%;
+  }
+
+  body{
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .phone{
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 26px 34px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-icon{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 30px;
+    margin-bottom: 18px;
+  }
+  .menu-icon span{
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--gold-dark);
+  }
+  .menu-icon span:nth-child(1){ width: 30px; }
+  .menu-icon span:nth-child(2){ width: 30px; }
+  .menu-icon span:nth-child(3){ width: 30px; }
+
+  .greeting{
+    text-align: center;
+    margin: 6px 0 2px;
+  }
+
+  .dear-guest{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 4px;
+    font-size: 13px;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+
+  .welcome-title{
+    font-family: 'Alex Brush', cursive;
+    font-size: 68px;
+    color: var(--brown);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .click-icons{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    font-size: 13px;
+    color: var(--ink);
+    margin: 10px 0 26px;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 26px;
+    column-gap: 8px;
+    flex: 1;
+    align-content: center;
+  }
+
+  .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .icon-wrap{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .icon-wrap svg{
+    width: 100%;
+    height: 100%;
+    stroke: var(--brown);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .label{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .faq-bubble{
+    width: 48px;
+    height: 34px;
+    border: 1.4px solid var(--brown);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 13px;
+    color: var(--brown);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .faq-bubble::after{
+    content:"";
+    position: absolute;
+    bottom: -7px;
+    left: 12px;
+    width: 10px;
+    height: 10px;
+    border-left: 1.4px solid var(--brown);
+    border-bottom: 1.4px solid var(--brown);
+    background: linear-gradient(135deg, transparent 50%, var(--cream) 50%);
+    transform: rotate(-45deg);
+  }
+
+  .contact-btn-wrap{
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    bottom: 22px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact-btn{
+    width: 100%;
+    max-width: 300px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 14px rgba(180,130,50,0.35);
+  }
+
+  .spacer{
+    height: 70px;
+  }
+
+  /* Pullup / full-screen panel */
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 22, 14, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+    z-index: 10;
+  }
+  .overlay.open{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .pullup{
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    top: 64px;
+    background: var(--cream);
+    border-radius: 28px;
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.25);
+    transform: translateY(calc(100% + 16px));
+    transition: transform 0.34s cubic-bezier(.32,.72,.35,1);
+    z-index: 11;
+    padding: 18px 24px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pullup.open{
+    transform: translateY(0);
+  }
+
+  .pullup-handle{
+    width: 42px;
+    height: 4px;
+    border-radius: 2px;
+    background: #d8cbb2;
+    margin: 4px auto 16px;
+  }
+
+  .pullup-header{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .pullup-icon{
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+  .pullup-icon svg{
+    width: 100%;
+    height: 100%;
+    stroke: var(--brown);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .pullup-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-size: 21px;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .pullup-close{
+    margin-left: auto;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pullup-close svg{
+    width: 18px;
+    height: 18px;
+    stroke: var(--brown);
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .pullup-body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--line);
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .pullup-body p{
+    margin: 0 0 12px;
+  }
+
+  .pullup-body ul{
+    margin: 0 0 12px;
+    padding-left: 18px;
+  }
+
+  .pullup-body li{
+    margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <div class="menu-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="greeting">
+    <p class="dear-guest">D E A R &nbsp; G U E S T,</p>
+    <h1 class="welcome-title">Welcome!</h1>
+    <p class="click-icons">C L I C K &nbsp; O N &nbsp; T H E &nbsp; I C O N S</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Welcome / House -->
+    <div class="item" onclick="openPullup('welcome')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M8 24 L24 10 L40 24"/><path d="M12 21 V40 H36 V21"/><path d="M20 40 V29 H28 V40"/></svg>
+      </div>
+      <div class="label">Welcome</div>
+    </div>
+
+    <!-- Driving Directions / Pin -->
+    <div class="item" onclick="openPullup('directions')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M24 6 C16 6 10 12 10 20 C10 30 24 44 24 44 C24 44 38 30 38 20 C38 12 32 6 24 6 Z"/><circle cx="24" cy="20" r="5.5"/></svg>
+      </div>
+      <div class="label">Driving<br>Directions</div>
+    </div>
+
+    <!-- Check-in/out / Key -->
+    <div class="item" onclick="openPullup('checkinout')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><circle cx="16" cy="24" r="8"/><path d="M22 24 H42 M34 24 V31 M40 24 V29"/></svg>
+      </div>
+      <div class="label">Check-In/Out</div>
+    </div>
+
+    <!-- Wifi -->
+    <div class="item" onclick="openPullup('wifi')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M8 19 C17 10 31 10 40 19"/><path d="M14 26 C20 20 28 20 34 26"/><path d="M20 33 C22.5 30.5 25.5 30.5 28 33"/><circle cx="24" cy="38" r="1.8" fill="var(--brown)" stroke="none"/></svg>
+      </div>
+      <div class="label">Wifi</div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="item" onclick="openPullup('faq')">
+      <div class="faq-bubble">FAQ</div>
+      <div class="label">FAQ</div>
+    </div>
+
+    <!-- Places to visit / camera -->
+    <div class="item" onclick="openPullup('places')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M8 17 H16 L19 12 H29 L32 17 H40 V37 H8 Z"/><circle cx="24" cy="27" r="6.5"/></svg>
+      </div>
+      <div class="label">Places To<br>Visit</div>
+    </div>
+
+    <!-- Supermarket and Shops / basket -->
+    <div class="item" onclick="openPullup('shops')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M10 20 H38 L34 40 H14 Z"/><path d="M17 20 C17 13 20 9 24 9 C28 9 31 13 31 20"/><path d="M14 26 H34 M15.5 33 H32.5"/></svg>
+      </div>
+      <div class="label">Supermarket<br>and Shops</div>
+    </div>
+
+    <!-- Restaurants and Cafes / dome plate -->
+    <div class="item" onclick="openPullup('restaurants')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M9 28 C9 20 15.5 15 24 15 C32.5 15 39 20 39 28 Z"/><path d="M7 28 H41"/><path d="M24 15 V9"/><path d="M20 9 H28"/><path d="M9 34 H39"/></svg>
+      </div>
+      <div class="label">Restaurants<br>and Cafes</div>
+    </div>
+
+    <!-- Excursions and Experiences / boat -->
+    <div class="item" onclick="openPullup('excursions')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M8 30 H40 L35 40 H13 Z"/><path d="M24 30 V10 M24 12 L32 17 L24 20 Z"/><path d="M17 30 V16 H21 V30"/></svg>
+      </div>
+      <div class="label">Excursions and<br>Experiences</div>
+    </div>
+
+    <!-- Transport / bicycle -->
+    <div class="item" onclick="openPullup('transport')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><circle cx="13" cy="33" r="7"/><circle cx="35" cy="33" r="7"/><path d="M13 33 L20 18 H28 M20 18 L28 33 H13 M28 18 L35 33 M25 12 H31 M25 12 L28 18"/></svg>
+      </div>
+      <div class="label">Transport</div>
+    </div>
+
+    <!-- Review / speech bubble -->
+    <div class="item" onclick="openPullup('review')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><path d="M14 18 H34 M14 24 H28"/></svg>
+      </div>
+      <div class="label">Review</div>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="contact-btn-wrap">
+    <button class="contact-btn">Contact</button>
+  </div>
+
+  <!-- Overlay + Pullup -->
+  <div class="overlay" id="overlay" onclick="closePullup()"></div>
+
+  <div class="pullup" id="pullup">
+    <div class="pullup-handle"></div>
+    <div class="pullup-header">
+      <div class="pullup-icon" id="pullup-icon"></div>
+      <h2 class="pullup-title" id="pullup-title"></h2>
+      <button class="pullup-close" onclick="closePullup()">
+        <svg viewBox="0 0 24 24"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+      </button>
+    </div>
+    <div class="pullup-body" id="pullup-body"></div>
+  </div>
+
+</div>
+
+<script>
+  const content = {
+    welcome: {
+      title: "Welcome",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 24 L24 10 L40 24"/><path d="M12 21 V40 H36 V21"/><path d="M20 40 V29 H28 V40"/></svg>`,
+      body: `<p>We're so glad you're here. This little guide has everything you need for a smooth, relaxed stay — directions, wifi, local tips and more, all just a tap away.</p><p>If you need anything at all, use the Contact button below and we'll get right back to you.</p>`
+    },
+    directions: {
+      title: "Driving Directions",
+      icon: `<svg viewBox="0 0 48 48"><path d="M24 6 C16 6 10 12 10 20 C10 30 24 44 24 44 C24 44 38 30 38 20 C38 12 32 6 24 6 Z"/><circle cx="24" cy="20" r="5.5"/></svg>`,
+      body: `<p>From the motorway, take the exit for the town centre and follow signs for the harbour. We're the third house on the left after the church.</p><ul><li>15 min from the airport</li><li>Free parking out front</li><li>Look for the blue gate</li></ul>`
+    },
+    checkinout: {
+      title: "Check-In / Out",
+      icon: `<svg viewBox="0 0 48 48"><circle cx="16" cy="24" r="8"/><path d="M22 24 H42 M34 24 V31 M40 24 V29"/></svg>`,
+      body: `<p><strong>Check-in:</strong> from 3:00 PM</p><p><strong>Check-out:</strong> by 11:00 AM</p><p>Keys are in the lockbox by the front door — the code will be sent to you the morning of arrival.</p>`
+    },
+    wifi: {
+      title: "Wifi",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 19 C17 10 31 10 40 19"/><path d="M14 26 C20 20 28 20 34 26"/><path d="M20 33 C22.5 30.5 25.5 30.5 28 33"/><circle cx="24" cy="38" r="1.8" fill="#7a5230" stroke="none"/></svg>`,
+      body: `<p><strong>Network:</strong> GuestHouse_5G</p><p><strong>Password:</strong> welcome2024</p><p>The router is in the hallway if you ever need to give it a restart.</p>`
+    },
+    faq: {
+      title: "FAQ",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><text x="24" y="25" font-size="10" text-anchor="middle" fill="#7a5230" stroke="none">?</text></svg>`,
+      body: `<p><strong>Is parking included?</strong> Yes, one space out front.</p><p><strong>Pets allowed?</strong> Small pets welcome, just let us know ahead.</p><p><strong>Late check-out?</strong> Ask us the morning of — happy to help if we can.</p>`
+    },
+    places: {
+      title: "Places to Visit",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 17 H16 L19 12 H29 L32 17 H40 V37 H8 Z"/><circle cx="24" cy="27" r="6.5"/></svg>`,
+      body: `<ul><li>The Old Harbour — 10 min walk</li><li>St. Anne's Viewpoint — great at sunset</li><li>Town Museum — open till 5pm</li><li>Cliff Walk trailhead — 5 min drive</li></ul>`
+    },
+    shops: {
+      title: "Supermarket and Shops",
+      icon: `<svg viewBox="0 0 48 48"><path d="M10 20 H38 L34 40 H14 Z"/><path d="M17 20 C17 13 20 9 24 9 C28 9 31 13 31 20"/><path d="M14 26 H34 M15.5 33 H32.5"/></svg>`,
+      body: `<p><strong>SuperValu</strong> — 4 min walk, open till 10pm</p><p><strong>Local butcher & bakery</strong> — on the main street, closes 6pm</p><p><strong>Sunday market</strong> — town square, mornings only</p>`
+    },
+    restaurants: {
+      title: "Restaurants and Cafes",
+      icon: `<svg viewBox="0 0 48 48"><path d="M9 28 C9 20 15.5 15 24 15 C32.5 15 39 20 39 28 Z"/><path d="M7 28 H41"/><path d="M24 15 V9"/><path d="M20 9 H28"/><path d="M9 34 H39"/></svg>`,
+      body: `<ul><li>The Copper Kettle — cosy breakfast spot</li><li>Harbour Grill — great seafood, book ahead</li><li>Bean & Leaf — coffee and pastries</li><li>Molly's Pub — casual dinner, live music Fridays</li></ul>`
+    },
+    excursions: {
+      title: "Excursions and Experiences",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 30 H40 L35 40 H13 Z"/><path d="M24 30 V10 M24 12 L32 17 L24 20 Z"/><path d="M17 30 V16 H21 V30"/></svg>`,
+      body: `<ul><li>Boat tour of the bay — daily at 11am</li><li>Guided cliff hike — half day</li><li>Kayak rental at the harbour</li><li>Local cooking class — book 24hrs ahead</li></ul>`
+    },
+    transport: {
+      title: "Transport",
+      icon: `<svg viewBox="0 0 48 48"><circle cx="13" cy="33" r="7"/><circle cx="35" cy="33" r="7"/><path d="M13 33 L20 18 H28 M20 18 L28 33 H13 M28 18 L35 33 M25 12 H31 M25 12 L28 18"/></svg>`,
+      body: `<p>Buses to town run every 20 minutes from the stop at the corner. A taxi rank is by the harbour, or you can call a local driver directly.</p><p>Bikes are available to borrow from the shed — just ask.</p>`
+    },
+    review: {
+      title: "Review",
+      icon: `<svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><path d="M14 18 H34 M14 24 H28"/></svg>`,
+      body: `<p>We hope you had a wonderful stay! If you have a moment, we'd love to hear your thoughts — it really helps us and future guests.</p><p>Tap below to leave your review.</p>`
+    }
+  };
+
+  const overlay = document.getElementById('overlay');
+  const pullup = document.getElementById('pullup');
+
+  function openPullup(key){
+    const data = content[key];
+    if(!data) return;
+    document.getElementById('pullup-icon').innerHTML = data.icon;
+    document.getElementById('pullup-title').textContent = data.title;
+    document.getElementById('pullup-body').innerHTML = data.body;
+    overlay.classList.add('open');
+    pullup.classList.add('open');
+  }
+
+  function closePullup(){
+    overlay.classList.remove('open');
+    pullup.classList.remove('open');
+  }
+</script>
+
+</body>
+</html>
