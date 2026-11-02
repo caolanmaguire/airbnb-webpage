@@ -187,6 +187,7 @@
     font-size: 12px;
     text-transform: uppercase;
     box-shadow: 0 6px 14px rgba(180,130,50,0.35);
+    cursor: pointer;
   }
 
   .spacer{
@@ -291,6 +292,22 @@
   .pullup-body p{ margin: 0 0 12px; }
   .pullup-body ul{ margin: 0 0 12px; padding-left: 18px; }
   .pullup-body li{ margin-bottom: 6px; }
+  .pullup-body a{ color: var(--brown); }
+
+  .section-heading{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 18px 0 8px;
+  }
+
+  .signoff{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
 
   /* Banner (Welcome) */
   .banner-img{
@@ -308,7 +325,7 @@
     align-items: center;
     gap: 8px;
     background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     border-radius: 20px;
     padding: 10px 18px;
@@ -360,60 +377,8 @@
     font-size: 16px;
     color: var(--ink);
   }
+  .info-value a{ color: var(--ink); }
 
-  /* Accordion (FAQ) */
-  .accordion-item{
-    border: 1px solid #e9dfc9;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    background: #fff;
-    overflow: hidden;
-  }
-  .accordion-btn{
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    cursor: pointer;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 15.5px;
-    color: var(--ink);
-  }
-  .accordion-btn .plus{
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    position: relative;
-  }
-  .accordion-btn .plus::before,
-  .accordion-btn .plus::after{
-    content:"";
-    position: absolute;
-    background: var(--brown);
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-  }
-  .accordion-btn .plus::before{ width: 14px; height: 2px; }
-  .accordion-btn .plus::after{ width: 2px; height: 14px; transition: transform 0.25s ease; }
-  .accordion-item.open .plus::after{ transform: translate(-50%,-50%) rotate(90deg); }
-
-  .accordion-panel{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .accordion-panel-inner{
-    padding: 0 16px 16px;
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--line);
-  }
 
   /* Place cards (Places / Restaurants / Shops / Excursions) */
   .place-card{
@@ -469,21 +434,13 @@
     color: var(--ink);
     margin: 0 0 2px;
   }
+  .biz-detail a{ color: var(--brown); }
   .biz-detail{
     font-size: 12px;
     color: var(--line);
     margin: 0;
   }
 
-  /* Review */
-  .review-box{
-    background: #fff;
-    border: 1px solid #e9dfc9;
-    border-radius: 14px;
-    padding: 20px 18px;
-    text-align: center;
-  }
-  .review-box p{ margin: 0 0 14px; }
 </style>
 </head>
 <body>
@@ -525,17 +482,7 @@
       <div class="label">Check-In/Out</div>
     </div>
 
-    <div class="item" onclick="openPullup('wifi')">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 48 48"><path d="M8 19 C17 10 31 10 40 19"/><path d="M14 26 C20 20 28 20 34 26"/><path d="M20 33 C22.5 30.5 25.5 30.5 28 33"/><circle cx="24" cy="38" r="1.8" fill="var(--brown)" stroke="none"/></svg>
-      </div>
-      <div class="label">Wifi</div>
-    </div>
 
-    <div class="item" onclick="openPullup('faq')">
-      <div class="faq-bubble">FAQ</div>
-      <div class="label">FAQ</div>
-    </div>
 
     <div class="item" onclick="openPullup('places')">
       <div class="icon-wrap">
@@ -572,19 +519,13 @@
       <div class="label">Transport</div>
     </div>
 
-    <div class="item" onclick="openPullup('review')">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><path d="M14 18 H34 M14 24 H28"/></svg>
-      </div>
-      <div class="label">Review</div>
-    </div>
 
   </div>
 
   <div class="spacer"></div>
 
   <div class="contact-btn-wrap">
-    <button class="contact-btn">Contact</button>
+    <button class="contact-btn" onclick="location.href='tel:+353858618755'">Contact</button>
   </div>
 
   <div class="overlay" id="overlay" onclick="closePullup()"></div>
@@ -610,29 +551,29 @@
     return `<a class="btn-maps" href="${url}" target="_blank" rel="noopener">${mapsIcon} View on Map</a>`;
   }
 
-  function placeCard(img, name, desc, mapQuery){
+  // Photos load from the images/ folder until real ones are added
+  function placeCard(img, name, desc, mapQuery, credit){
     return `<div class="place-card">
-      <img class="place-img" src="${img}" alt="${name}">
+      ${img ? `<img class="place-img" src="${img}" alt="${name}">` : ''}
       <div class="place-info">
         <p class="place-name">${name}</p>
-        <p class="place-desc">${desc}</p>
+        <p class="place-desc">${desc}${credit ? `<br><small>Photo: ${credit}</small>` : ''}</p>
         ${mapsBtn(mapQuery)}
       </div>
     </div>`;
   }
 
-  function bizCard(img, name, detail){
+  function bizCard(img, name, phone){
+    const tel = phone.replace(/\s/g, '');
     return `<div class="biz-card">
       <img class="biz-img" src="${img}" alt="${name}">
       <div>
         <p class="biz-name">${name}</p>
-        <p class="biz-detail">${detail}</p>
+        <p class="biz-detail"><a href="tel:${tel}">${phone}</a></p>
       </div>
     </div>`;
   }
 
-  const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-  const loremShort = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
   const content = {
 
@@ -640,9 +581,19 @@
       title: "Welcome",
       icon: `<svg viewBox="0 0 48 48"><path d="M8 24 L24 10 L40 24"/><path d="M12 21 V40 H36 V21"/><path d="M20 40 V29 H28 V40"/></svg>`,
       body: `
-        <img class="banner-img" src="https://picsum.photos/seed/welcomehouse/800/450" alt="Welcome banner">
-        <p>${lorem} ${lorem}</p>
-        <p>${loremShort}</p>
+        <img class="banner-img" src="https://picsum.photos/seed/welcomehouse/800/450" alt="Radharc na Cluana">
+        <p>Hello and a very warm welcome to Radharc na Cluana. My name is Pauline and I’m delighted to share my home with you.</p>
+        <p class="section-heading">About the house</p>
+        <p>The house holds a very special place in my heart, as it was built by my father in the year 2000. It is more than just a house to me; it is part of my family’s history and a lasting reminder of his hard work, care and dedication.</p>
+        <p>I’m very proud to welcome guests here and to share a place that means so much to me.</p>
+        <p class="section-heading">About the host</p>
+        <p>I wanted to create a place that feels warm, cozy and welcoming, where guests can relax, unwind and enjoy a little time away from the hustle and bustle of everyday life.</p>
+        <p>I believe it’s the little things that make a stay special, and I hope you’ll find everything you need to feel right at home during your visit.</p>
+        <p>Ballyconnell is surrounded by beautiful countryside, lakes and wonderful places to explore, whether you’re here for a wedding in the nearby Slieve Russell Hotel, a family getaway or simply a peaceful break.</p>
+        <p>I hope you enjoy discovering all that the area has to offer.</p>
+        <p>I want you to feel comfortable and at home while staying here, so if there’s anything you need or if I can help, please don’t hesitate to get in touch.</p>
+        <p>Thank you for choosing Radharc na Cluana. It means a lot to me to welcome guests into my home &amp; I hope you leave with happy memories and the feeling that you’ve had a lovely little home away from home.</p>
+        <p class="signoff">Wishing you a wonderful stay.<br>Warmest wishes,<br>Pauline</p>
       `
     },
 
@@ -650,7 +601,6 @@
       title: "Driving Directions",
       icon: `<svg viewBox="0 0 48 48"><path d="M24 6 C16 6 10 12 10 20 C10 30 24 44 24 44 C24 44 38 30 38 20 C38 12 32 6 24 6 Z"/><circle cx="24" cy="20" r="5.5"/></svg>`,
       body: `
-        <p>${lorem}</p>
         <a class="btn-maps" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Ballyconnell, Co. Cavan, Ireland')}" target="_blank" rel="noopener">${mapsIcon} Get Directions to Ballyconnell</a>
       `
     },
@@ -662,99 +612,70 @@
         <div class="info-card">
           <div class="info-row"><span class="info-label">Check-in</span><span class="info-value">3:00 PM</span></div>
           <div class="info-row"><span class="info-label">Check-out</span><span class="info-value">11:00 AM</span></div>
-          <div class="info-row"><span class="info-label">Contact</span><span class="info-value">+353 00 000 0000</span></div>
+          <div class="info-row"><span class="info-label">Host</span><span class="info-value">Pauline Maguire</span></div>
+          <div class="info-row"><span class="info-label">Phone</span><span class="info-value"><a href="tel:+353858618755">+353 85 861 8755</a></span></div>
         </div>
-        <p>${loremShort}</p>
+        <p class="section-heading">House rules</p>
+        <ul>
+          <li>No pets</li>
+          <li>No smoking</li>
+          <li>No loud noise after 10pm</li>
+          <li>Switch off heating before you leave</li>
+        </ul>
       `
     },
 
-    wifi: {
-      title: "Wifi",
-      icon: `<svg viewBox="0 0 48 48"><path d="M8 19 C17 10 31 10 40 19"/><path d="M14 26 C20 20 28 20 34 26"/><path d="M20 33 C22.5 30.5 25.5 30.5 28 33"/><circle cx="24" cy="38" r="1.8" fill="#7a5230" stroke="none"/></svg>`,
-      body: `
-        <div class="info-card">
-          <div class="info-row"><span class="info-label">Username</span><span class="info-value">Lorem Ipsum</span></div>
-          <div class="info-row"><span class="info-label">Password</span><span class="info-value">loremipsum123</span></div>
-        </div>
-      `
-    },
 
-    faq: {
-      title: "FAQ",
-      icon: `<svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><text x="24" y="25" font-size="10" text-anchor="middle" fill="#7a5230" stroke="none">?</text></svg>`,
-      body: `
-        <div class="accordion-item">
-          <button class="accordion-btn" onclick="toggleAccordion(this)"><span>Lorem ipsum dolor sit amet?</span><span class="plus"></span></button>
-          <div class="accordion-panel"><div class="accordion-panel-inner">${lorem}</div></div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-btn" onclick="toggleAccordion(this)"><span>Consectetur adipiscing elit?</span><span class="plus"></span></button>
-          <div class="accordion-panel"><div class="accordion-panel-inner">${lorem}</div></div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-btn" onclick="toggleAccordion(this)"><span>Sed do eiusmod tempor?</span><span class="plus"></span></button>
-          <div class="accordion-panel"><div class="accordion-panel-inner">${lorem}</div></div>
-        </div>
-        <div class="accordion-item">
-          <button class="accordion-btn" onclick="toggleAccordion(this)"><span>Incididunt ut labore?</span><span class="plus"></span></button>
-          <div class="accordion-panel"><div class="accordion-panel-inner">${lorem}</div></div>
-        </div>
-      `
-    },
 
     places: {
       title: "Places to Visit",
       icon: `<svg viewBox="0 0 48 48"><path d="M8 17 H16 L19 12 H29 L32 17 H40 V37 H8 Z"/><circle cx="24" cy="27" r="6.5"/></svg>`,
       body:
-        placeCard("https://picsum.photos/seed/heritagewalk/300/300", "Ballyconnell Heritage Trail", loremShort, "Ballyconnell Heritage Trail") +
-        placeCard("https://picsum.photos/seed/windfarm/300/300", "Slieve Rushen Wind Farm Walk", loremShort, "Slieve Rushen Wind Farm") +
-        placeCard("https://picsum.photos/seed/museum/300/300", "Cavan County Museum", loremShort, "Cavan County Museum")
+        placeCard("https://commons.wikimedia.org/wiki/Special:FilePath/Ballyconnell_bridge.jpg?width=300", "Woodford River Walk", "Riverside walking trail along the Woodford River in Ballyconnell.", "Woodford River Walk Ballyconnell", "Wikimedia Commons") +
+        placeCard("https://www.irelandbeforeyoudie.com/wp-content/uploads/2020/10/cuilcagh-boardwalk-1024x1024.jpg", "Stairway to Heaven", "Boardwalk and staircase up Cuilcagh Mountain with wide views over Cavan and Fermanagh.", "Cuilcagh Boardwalk Stairway to Heaven") +
+        placeCard("https://s3.geograph.org.uk/geophotos/07/02/52/7025267_dc4beda0_120x120.jpg", "Marble Arch Caves", "Show caves explored on foot and by boat in the Marble Arch Caves Global Geopark.", "Marble Arch Caves", "N Chadwick, CC BY-SA 2.0") +
+        placeCard("https://s0.geograph.org.uk/geophotos/07/03/11/7031152_7d6070ac.jpg", "Cavan Burren Park", "Prehistoric landscape with ancient tombs, rock formations and walking trails.", "Cavan Burren Park", "N Chadwick, CC BY-SA 2.0") +
+        placeCard("images/bear-essentials.jpg", "Bear Essentials Visitor Centre", "Visitor centre with a teddy bear collection and craft shop.", "Bear Essentials Visitor Centre Cavan") +
+        placeCard("https://www.irelandbeforeyoudie.com/wp-content/uploads/2018/08/Killykeen-Forest-Park.jpg", "Killykeen Forest Park", "Forest park on Lough Oughter with woodland and lakeside trails.", "Killykeen Forest Park") +
+        `<p>Before visiting these places, please check opening times &amp; weather conditions.</p>`
     },
 
     shops: {
       title: "Supermarket and Shops",
       icon: `<svg viewBox="0 0 48 48"><path d="M10 20 H38 L34 40 H14 Z"/><path d="M17 20 C17 13 20 9 24 9 C28 9 31 13 31 20"/><path d="M14 26 H34 M15.5 33 H32.5"/></svg>`,
       body:
-        placeCard("https://picsum.photos/seed/supervalu/300/300", "Ballyconnell SuperValu", loremShort, "SuperValu Ballyconnell") +
-        placeCard("https://picsum.photos/seed/craftshop/300/300", "Village Craft Shop", loremShort, "Village Craft Shop Ballyconnell") +
-        placeCard("https://picsum.photos/seed/butchers/300/300", "McGoldrick's Butchers", loremShort, "McGoldricks Butchers Ballyconnell")
+        placeCard("images/supervalu.jpg", "SuperValu", "Supermarket in Ballyconnell.", "SuperValu Ballyconnell") +
+        placeCard("images/kennedys.jpg", "Kennedys", "Local shop in Ballyconnell.", "Kennedys Ballyconnell")
     },
 
     restaurants: {
       title: "Restaurants and Cafes",
       icon: `<svg viewBox="0 0 48 48"><path d="M9 28 C9 20 15.5 15 24 15 C32.5 15 39 20 39 28 Z"/><path d="M7 28 H41"/><path d="M24 15 V9"/><path d="M20 9 H28"/><path d="M9 34 H39"/></svg>`,
       body:
-        placeCard("https://picsum.photos/seed/bridgerestaurant/300/300", "The Bridge Restaurant", loremShort, "The Bridge Restaurant Ballyconnell") +
-        placeCard("https://picsum.photos/seed/riversidecafe/300/300", "Riverside Café", loremShort, "Riverside Cafe Ballyconnell") +
-        placeCard("https://picsum.photos/seed/grillbar/300/300", "Slieve Russell Bar & Grill", loremShort, "Slieve Russell Bar and Grill")
+        placeCard("images/daily-brew.jpg", "Daily Brew Coffee House", "Coffee house in Ballyconnell.", "Daily Brew Coffee House Ballyconnell") +
+        placeCard("images/cafe-realta.jpg", "Cafe Realta", "Café in Ballyconnell.", "Cafe Realta Ballyconnell") +
+        placeCard("images/aroma.jpg", "Aroma Coffee House", "Coffee house in Ballyconnell.", "Aroma Coffee House Ballyconnell") +
+        placeCard("images/bridge-bar.jpg", "Bridge Bar Restaurant", "Bar and restaurant in Ballyconnell.", "Bridge Bar Restaurant Ballyconnell") +
+        placeCard("images/anglers-rest.jpg", "Anglers Rest", "Restaurant in Ballyconnell.", "Anglers Rest Ballyconnell") +
+        placeCard("images/bayleaf.jpg", "Bayleaf Restaurant", "Restaurant in Ballyconnell.", "Bayleaf Restaurant Ballyconnell")
     },
 
     excursions: {
       title: "Excursions and Experiences",
       icon: `<svg viewBox="0 0 48 48"><path d="M8 30 H40 L35 40 H13 Z"/><path d="M24 30 V10 M24 12 L32 17 L24 20 Z"/><path d="M17 30 V16 H21 V30"/></svg>`,
       body:
-        placeCard("https://picsum.photos/seed/waterwaycruise/300/300", "Shannon-Erne Waterway Cruise", loremShort, "Shannon Erne Waterway") +
-        placeCard("https://picsum.photos/seed/equestrian/300/300", "Cavan Equestrian Centre", loremShort, "Cavan Equestrian Centre") +
-        placeCard("https://picsum.photos/seed/cuilcagh/300/300", "Cuilcagh Boardwalk Trail", loremShort, "Cuilcagh Boardwalk Trail")
+        placeCard("images/slieve-russell.jpg", "Slieve Russell Hotel Golf &amp; Country Club", "Hotel, golf and country club just outside Ballyconnell.", "Slieve Russell Hotel Golf & Country Club Ballyconnell") +
+        placeCard("https://s0.geograph.org.uk/geophotos/01/30/68/1306850_7f17b09b.jpg", "Shannon-Erne Waterway", "Restored canal linking the Shannon and Erne, popular for boating and walks.", "Shannon-Erne Waterway Ballyconnell", "geograph.org.uk, CC BY-SA 2.0")
     },
 
     transport: {
       title: "Transport",
       icon: `<svg viewBox="0 0 48 48"><circle cx="13" cy="33" r="7"/><circle cx="35" cy="33" r="7"/><path d="M13 33 L20 18 H28 M20 18 L28 33 H13 M28 18 L35 33 M25 12 H31 M25 12 L28 18"/></svg>`,
       body:
-        bizCard("https://picsum.photos/seed/taxicard/200/200", "O'Reilly Taxis", "+353 00 000 0000") +
-        bizCard("https://picsum.photos/seed/buscard/200/200", "Bus Éireann — Ballyconnell Stop", "+353 00 000 0000") +
-        bizCard("https://picsum.photos/seed/carrentalcard/200/200", "Enterprise Car Rental", "+353 00 000 0000")
-    },
-
-    review: {
-      title: "Review",
-      icon: `<svg viewBox="0 0 48 48"><path d="M8 12 H40 V32 H20 L13 39 V32 H8 Z"/><path d="M14 18 H34 M14 24 H28"/></svg>`,
-      body: `
-        <div class="review-box">
-          <p>We hope you had a wonderful stay with us! If you have a moment, would you mind leaving us a review on Airbnb? It means the world to us and really helps future guests.</p>
-        </div>
-      `
+        bizCard("images/vincent-mcgovern.jpg", "Vincent McGovern, Glan", "+353 87 232 1698") +
+        bizCard("images/martin-coaches.jpg", "Martin Coaches", "+353 49 952 6222") +
+        bizCard("images/bob-leonard.jpg", "Bob Leonard", "+353 87 777 6077") +
+        bizCard("images/connolly-cabs.jpg", "Connolly Cabs", "+353 87 795 6679")
     }
   };
 
@@ -778,26 +699,6 @@
     document.body.style.overflow = '';
   }
 
-  function toggleAccordion(btn){
-    const item = btn.parentElement;
-    const panel = item.querySelector('.accordion-panel');
-    const isOpen = item.classList.contains('open');
-
-    item.parentElement.querySelectorAll('.accordion-item.open').forEach(openItem => {
-      if(openItem !== item){
-        openItem.classList.remove('open');
-        openItem.querySelector('.accordion-panel').style.maxHeight = null;
-      }
-    });
-
-    if(isOpen){
-      item.classList.remove('open');
-      panel.style.maxHeight = null;
-    } else {
-      item.classList.add('open');
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    }
-  }
 </script>
 
 </body>
