@@ -529,11 +529,18 @@
       <div class="label">Excursions and<br>Experiences</div>
     </div>
 
+    <div class="item" onclick="openPullup('hotels')">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 48 48"><path d="M10 40 V12 H30 V40"/><path d="M30 20 H38 V40"/><path d="M6 40 H42"/><path d="M15 17 H18 M22 17 H25 M15 23 H18 M22 23 H25 M15 29 H18 M22 29 H25"/><path d="M18 40 V34 H22 V40"/></svg>
+      </div>
+      <div class="label">Hotels &amp;<br>Venues</div>
+    </div>
+
     <div class="item" onclick="openPullup('transport')">
       <div class="icon-wrap">
         <svg viewBox="0 0 48 48"><circle cx="13" cy="33" r="7"/><circle cx="35" cy="33" r="7"/><path d="M13 33 L20 18 H28 M20 18 L28 33 H13 M28 18 L35 33 M25 12 H31 M25 12 L28 18"/></svg>
       </div>
-      <div class="label">Transport</div>
+      <div class="label">Taxis</div>
     </div>
 
 
@@ -644,6 +651,8 @@
         <ul>
           <li>No pets</li>
           <li>No smoking</li>
+          <li>No candles</li>
+          <li>No parties</li>
           <li>No loud noise after 10pm</li>
           <li>Switch off heating before you leave</li>
         </ul>
@@ -670,7 +679,8 @@
       icon: `<svg viewBox="0 0 48 48"><path d="M10 20 H38 L34 40 H14 Z"/><path d="M17 20 C17 13 20 9 24 9 C28 9 31 13 31 20"/><path d="M14 26 H34 M15.5 33 H32.5"/></svg>`,
       body:
         placeCard("images/supervalu.jpg", "SuperValu", "Supermarket in Ballyconnell.", "SuperValu Ballyconnell") +
-        placeCard("images/kennedys.jpg", "Kennedys", "Local shop in Ballyconnell.", "Kennedys Ballyconnell")
+        placeCard("images/kennedys.jpg", "Kennedys Hardware &amp; Supermarket", "Hardware shop and supermarket in Ballyconnell.", "Kennedys Hardware Ballyconnell") +
+        placeCard("images/ronnies.jpg", "Ronnies Fruit &amp; Veg", "Fruit and vegetable shop in Ballyconnell.", "Ronnies Fruit & Veg Ballyconnell")
     },
 
     restaurants: {
@@ -689,12 +699,21 @@
       title: "Excursions and Experiences",
       icon: `<svg viewBox="0 0 48 48"><path d="M8 30 H40 L35 40 H13 Z"/><path d="M24 30 V10 M24 12 L32 17 L24 20 Z"/><path d="M17 30 V16 H21 V30"/></svg>`,
       body:
-        placeCard("images/slieve-russell.jpg", "Slieve Russell Hotel Golf &amp; Country Club", "Hotel, golf and country club just outside Ballyconnell.", "Slieve Russell Hotel Golf & Country Club Ballyconnell") +
         placeCard("https://s0.geograph.org.uk/geophotos/01/30/68/1306850_7f17b09b.jpg", "Shannon-Erne Waterway", "Restored canal linking the Shannon and Erne, popular for boating and walks.", "Shannon-Erne Waterway Ballyconnell", "geograph.org.uk, CC BY-SA 2.0")
     },
 
+    hotels: {
+      title: "Hotels & Venues",
+      icon: `<svg viewBox="0 0 48 48"><path d="M10 40 V12 H30 V40"/><path d="M30 20 H38 V40"/><path d="M6 40 H42"/><path d="M15 17 H18 M22 17 H25 M15 23 H18 M22 23 H25 M15 29 H18 M22 29 H25"/><path d="M18 40 V34 H22 V40"/></svg>`,
+      body:
+        placeCard("images/slieve-russell.jpg", "Slieve Russell Hotel Golf &amp; Country Club", "Hotel, golf and country club just outside Ballyconnell.", "Slieve Russell Hotel Golf & Country Club Ballyconnell") +
+        placeCard("images/cavan-crystal.jpg", "Cavan Crystal Hotel", "Hotel in Cavan town.", "Cavan Crystal Hotel") +
+        placeCard("images/kilmore-hotel.jpg", "Kilmore Hotel", "Hotel in Cavan town.", "Kilmore Hotel Cavan") +
+        placeCard("images/farnham-estate.jpg", "Farnham Estate", "Spa and golf resort near Cavan town.", "Farnham Estate Spa and Golf Resort Cavan")
+    },
+
     transport: {
-      title: "Transport",
+      title: "Taxis",
       icon: `<svg viewBox="0 0 48 48"><circle cx="13" cy="33" r="7"/><circle cx="35" cy="33" r="7"/><path d="M13 33 L20 18 H28 M20 18 L28 33 H13 M28 18 L35 33 M25 12 H31 M25 12 L28 18"/></svg>`,
       body:
         bizCard("Vincent McGovern, Glan", "+353 87 232 1698") +
