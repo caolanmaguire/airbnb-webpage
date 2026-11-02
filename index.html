@@ -336,6 +336,30 @@
     display: block;
   }
 
+
+  /* Photo gallery (Welcome) */
+  .gallery{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 0 0 16px;
+  }
+  .gallery figure{ margin: 0; }
+  .gallery img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+  .gallery figcaption{
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-top: 4px;
+  }
+
   /* Maps button */
   .btn-maps{
     display: inline-flex;
@@ -613,11 +637,22 @@
       title: "Welcome",
       icon: `<svg viewBox="0 0 48 48"><path d="M8 24 L24 10 L40 24"/><path d="M12 21 V40 H36 V21"/><path d="M20 40 V29 H28 V40"/></svg>`,
       body: `
-        <img class="banner-img" src="https://picsum.photos/seed/welcomehouse/800/450" alt="Radharc na Cluana">
+        <img class="banner-img" src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/15ab329f-8869-4413-8134-4374c84b2888.jpeg?im_w=720" alt="Front of Radharc na Cluana" onerror="this.onerror=null;this.src=DEFAULT_IMG">
         <p>Hello and a very warm welcome to Radharc na Cluana. My name is Pauline and I’m delighted to share my home with you.</p>
         <p class="section-heading">About the house</p>
         <p>The house holds a very special place in my heart, as it was built by my father in the year 2000. It is more than just a house to me; it is part of my family’s history and a lasting reminder of his hard work, care and dedication.</p>
         <p>I’m very proud to welcome guests here and to share a place that means so much to me.</p>
+        <p class="section-heading">Take a look around</p>
+        <div class="gallery">
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b2132201-1be2-48c6-b7c1-2c85ec473b9d.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b2132201-1be2-48c6-b7c1-2c85ec473b9d.jpeg?im_w=720" alt="Hall" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Hall</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/6580b698-bc21-4a9a-aeea-64f179b4c9be.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/6580b698-bc21-4a9a-aeea-64f179b4c9be.jpeg?im_w=720" alt="Sitting room" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Sitting room</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b7109e2a-27a2-4550-86eb-2da72046ae0b.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b7109e2a-27a2-4550-86eb-2da72046ae0b.jpeg?im_w=720" alt="Sitting room" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Sitting room</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b320e342-50ac-4eef-9808-142041f5398f.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/b320e342-50ac-4eef-9808-142041f5398f.jpeg?im_w=720" alt="Kitchen" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Kitchen</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/f369701b-9b89-4635-9584-61990788554e.jpeg?im_w=1200" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/f369701b-9b89-4635-9584-61990788554e.jpeg?im_w=1200" alt="Bedroom 1" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Bedroom 1</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/9176f0ef-bf31-42a6-9877-0727106f4925.jpeg?im_w=1200" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/9176f0ef-bf31-42a6-9877-0727106f4925.jpeg?im_w=1200" alt="Bedroom 2" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Bedroom 2</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/54a8b8dc-bbfe-4053-aaf2-37d1e66b8679.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/54a8b8dc-bbfe-4053-aaf2-37d1e66b8679.jpeg?im_w=720" alt="Bedroom 3" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Bedroom 3</figcaption></figure>
+          <figure><a href="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/4ce62c18-3521-4e1e-9271-a56ecc051677.jpeg?im_w=720" target="_blank" rel="noopener"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1798556949407189664/original/4ce62c18-3521-4e1e-9271-a56ecc051677.jpeg?im_w=720" alt="Bedroom 4" loading="lazy" onerror="this.onerror=null;this.src=DEFAULT_IMG"></a><figcaption>Bedroom 4</figcaption></figure>
+        </div>
         <p class="section-heading">About the host</p>
         <p>I wanted to create a place that feels warm, cozy and welcoming, where guests can relax, unwind and enjoy a little time away from the hustle and bustle of everyday life.</p>
         <p>I believe it’s the little things that make a stay special, and I hope you’ll find everything you need to feel right at home during your visit.</p>
